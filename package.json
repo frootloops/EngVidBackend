@@ -1,0 +1,12 @@
+{
+  "name": "engvid",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Arsen Gasparyan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "express": "^5.0.0-alpha.1",
+    "mongoose": "^3.9.7"
+  }
+}

@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://admin:admin@proximus.modulusmongo.net:27017/gyw6Ohej'); 
+mongoose.connect('mongodb://admin:admin@proximus.modulusmongo.net:27017/gyw6Ohej');
 
 var Video = require('./app/models/video');
 
@@ -38,11 +38,13 @@ router.route('/videos')
     });
   })
   .get(function(req, res) {
-    Video.find(function(err, videos) {
-      if (err) res.send(err);
+    var docsPerPage = 30;
+    var pageNumber = req.param("page", 1);
 
-      res.json(videos);
-    })
+    Video.findPaginated({}, function (err, result) {
+      if (err) throw err;
+      res.json(result)
+    }, docsPerPage, pageNumber);
   })
 
 router.get('/', function(req, res) {

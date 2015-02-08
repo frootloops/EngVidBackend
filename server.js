@@ -44,7 +44,7 @@ router.route('/videos')
     Video.findPaginated({}, function (err, result) {
       if (err) throw err;
       res.json(result)
-    }, docsPerPage, pageNumber);
+    }, docsPerPage, pageNumber).sort('-external_id');
   })
 
 router.get('/', function(req, res) {

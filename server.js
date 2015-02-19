@@ -40,8 +40,10 @@ router.route('/videos')
   .get(function(req, res) {
     var docsPerPage = 30;
     var pageNumber = req.param("page", 1);
+    var q = req.param("q");
+    var where = q && {"description": {$regex : ".*"+q+".*"}} || {}
 
-    Video.findPaginated({}, function (err, result) {
+    Video.findPaginated(where, function (err, result) {
       if (err) throw err;
       res.json(result)
     }, docsPerPage, pageNumber).sort('-external_id');
